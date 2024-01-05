@@ -81,7 +81,7 @@ test('Navegar para a página Outros', async ({ page }) => {
   await helper.url('/category/outros/')
 });
 
-test.only('Verificar links no submenu "Outros"', async ({ page }) => {
+test('Verificar links no submenu "Outros"', async ({ page }) => {
   const helper = new Helper(page)
   await page.getByRole('link', { name: 'Outros ' }).hover();
   await helper.verificaLinks(listaNomesOutros)
