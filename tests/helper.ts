@@ -1,4 +1,5 @@
 import { Page, expect } from '@playwright/test';
+import _ from 'lodash';
 
 export class Helper {
     readonly page: Page;
@@ -36,8 +37,6 @@ export class Helper {
     }
 
     async menu(nome) {
-        // const linkSelector = this.page.locator(`#menu-menu-principal:has-text("${nome}")`);
-        // await linkSelector.click()
         const selector = this.page.locator('#menu-menu-principal').getByRole('link', { name: nome })
         await selector.click()
     }
@@ -48,6 +47,18 @@ export class Helper {
 
     async url(endereco) {
         await expect(this.page).toHaveURL(endereco)
+    }
+
+    async emailAleatorio() {
+
+        const nomes = ["joao", "maria", "pedro", "kleber", "roberto", "vinicius", "rafael"];
+        const caracteresEspeciais = ["_"];
+        const provedoresEmail = ["@gmail.com", "@bol.com", "@gov.br", "@globo.com", "@mercado.com.br"];
+        const nomeAleatorio = _.sample(nomes);
+        const caracteresAleatorios = _.sample(caracteresEspeciais);
+        const provedorAleatorio = _.sample(provedoresEmail);
+        const emailGerado = `${nomeAleatorio}${caracteresAleatorios}${provedorAleatorio}`;
+        return emailGerado;
     }
 }
 
